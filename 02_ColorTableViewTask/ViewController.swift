@@ -43,9 +43,8 @@ extension ViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as? CustomTableViewCell
-        //        cell?.colorLabel.text = colorsText[indexPath.row]
-        //        cell?.backgroundColor = colors[indexPath.row]
-        cell?.configure(colorName: colorsText[indexPath.row], BGColor: colors[indexPath.row] ?? .purple)
+        let isLast = indexPath.row == colors.count-1 ? true : false;
+        cell?.configure(colorName: colorsText[indexPath.row], BGColor: colors[indexPath.row] ?? .purple, isLast: isLast)
         return cell ?? UITableViewCell()
     }
 }

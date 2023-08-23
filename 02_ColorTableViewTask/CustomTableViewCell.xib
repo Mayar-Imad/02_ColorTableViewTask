@@ -22,18 +22,30 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYH-iN-N3S">
+                        <rect key="frame" x="0.0" y="43.666666666666664" width="320" height="0.3333333333333357"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.33000000000000002" id="MaF-vD-KEf"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="VMI-Ul-hcS" secondAttribute="bottom" constant="11" id="3V2-vq-0po"/>
+                    <constraint firstItem="pYH-iN-N3S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FBI-nO-3yV"/>
                     <constraint firstItem="VMI-Ul-hcS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="PdH-ks-zab"/>
                     <constraint firstAttribute="trailing" secondItem="VMI-Ul-hcS" secondAttribute="trailing" constant="16" id="WXb-mh-dbW"/>
                     <constraint firstItem="VMI-Ul-hcS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Yg2-Yw-hql"/>
+                    <constraint firstAttribute="trailing" secondItem="pYH-iN-N3S" secondAttribute="trailing" id="gCs-cu-hVa"/>
+                    <constraint firstAttribute="bottom" secondItem="pYH-iN-N3S" secondAttribute="bottom" id="oHw-nZ-Zk2"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="colorLabel" destination="VMI-Ul-hcS" id="3yM-v1-NCp"/>
                 <outlet property="myView" destination="H2p-sc-9uM" id="EXC-Rt-2S6"/>
+                <outlet property="separator" destination="pYH-iN-N3S" id="C9H-G1-sOF"/>
+                <outlet property="separatorHeight" destination="MaF-vD-KEf" id="z0n-4R-RQS"/>
             </connections>
             <point key="canvasLocation" x="138.93129770992365" y="19.718309859154932"/>
         </tableViewCell>
