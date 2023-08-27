@@ -12,13 +12,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var separatorHight: NSLayoutConstraint!
+    @IBOutlet weak var editButton: UIButton!
+    
     private var colors: [UIColor?] = [UIColor(named: "Deep Teal"), UIColor(named: "Catalina Blue"), UIColor(named: "Dark Indigo"), UIColor(named: "Ripe Plum"), UIColor(named: "Mulberry Wood"), UIColor(named: "Kenyan Copper"), UIColor(named: "Chestnut"), UIColor(named: "Antique Bronze")]
     private var colorsText: [String] = ["Deep Teal","Catalina Blue", "Dark Indigo", "Ripe Plum", "Mulberry Wood", "Kenyan Copper", "Chestnut", "Antique Bronze"]
+    private var colorsId: [Int] = [0, 1, 2, 3, 4, 5, 6, 7]
+    let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureTableView()
+        colorsId = userDefaults.array(forKey: "colorsId") as? [Int] ?? colorsId
+        //userDefaults.set(colorsId, forKey: "colorsId")
     }
     
     func configureUI() {
@@ -34,6 +40,11 @@ class ViewController: UIViewController {
         let cellNib = UINib(nibName: "CustomTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "myCell")
     }
+    
+    @IBAction func toggleEditingMode(_ sender: Any) {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        editButton.setTitle(tableView.isEditing ?  "Done" : "Edit", for: .normal)
+    }
 }
 
 extension ViewController: UITableViewDataSource{
@@ -44,8 +55,16 @@ extension ViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as? CustomTableViewCell
         let isLast = indexPath.row == colors.count-1 ? true : false;
-        cell?.configure(colorName: colorsText[indexPath.row], BGColor: colors[indexPath.row] ?? .purple, isLast: isLast)
+        let indexArray = userDefaults.array(forKey: "colorsId") as? [Int] ?? colorsId
+        let index = indexArray[indexPath.row]
+        // print(index)
+        cell?.configure(colorName: colorsText[index], BGColor: colors[index] ?? .purple, isLast: isLast)
+        cell?.overrideUserInterfaceStyle = .dark
         return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return tableView.isEditing
     }
 }
 
@@ -54,5 +73,44 @@ extension ViewController: UITableViewDelegate{
         textView.backgroundColor = colors[indexPath.row]
         textView.text = "Description\n\n" + colorsText[indexPath.row]
     }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = colorsId.remove(at: sourceIndexPath.row)
+        colorsId.insert(movedObject, at: destinationIndexPath.row)
+        // print(colorsId)
+        userDefaults.set(colorsId, forKey: "colorsId")
+    }
+    // remove the - icon
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    // remove the space for the icon
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+            return false
+        }
+
 }
+
+//extension UITableViewCell {
+//
+//    var reorderControlImageView: UIImageView? {
+//        let reorderControl = self.subviews.first { view -> Bool in
+//            view.classForCoder.description() == "UITableViewCellReorderControl"
+//        }
+//        return reorderControl?.subviews.first { view -> Bool in
+//            view is UIImageView
+//        } as? UIImageView
+//    }
+//}
+//
+//extension UIImageView {
+//
+//    func tint(color: UIColor) {
+//        self.image = self.image?.withRenderingMode(.alwaysTemplate)
+//        self.tintColor = color
+//    }
+//}
+
+
+
 
