@@ -23,8 +23,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureTableView()
-        colorsId = userDefaults.array(forKey: "colorsId") as? [Int] ?? colorsId
-        //userDefaults.set(colorsId, forKey: "colorsId")
     }
     
     func configureUI() {
@@ -39,6 +37,7 @@ class ViewController: UIViewController {
     func configureTableView() {
         let cellNib = UINib(nibName: "CustomTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "myCell")
+        colorsId = userDefaults.array(forKey: "colorsId") as? [Int] ?? colorsId
     }
     
     @IBAction func toggleEditingMode(_ sender: Any) {
@@ -57,8 +56,8 @@ extension ViewController: UITableViewDataSource{
         let isLast = indexPath.row == colors.count-1 ? true : false;
         let indexArray = userDefaults.array(forKey: "colorsId") as? [Int] ?? colorsId
         let index = indexArray[indexPath.row]
-        // print(index)
         cell?.configure(colorName: colorsText[index], BGColor: colors[index] ?? .purple, isLast: isLast)
+        // to set the white color for the reorder icon
         cell?.overrideUserInterfaceStyle = .dark
         return cell ?? UITableViewCell()
     }
@@ -77,39 +76,20 @@ extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let movedObject = colorsId.remove(at: sourceIndexPath.row)
         colorsId.insert(movedObject, at: destinationIndexPath.row)
-        // print(colorsId)
         userDefaults.set(colorsId, forKey: "colorsId")
     }
-    // remove the - icon
+    
+    // remove the (-) icon
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
-    // remove the space for the icon
+    
+    // remove the space before the icon
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
             return false
         }
-
 }
 
-//extension UITableViewCell {
-//
-//    var reorderControlImageView: UIImageView? {
-//        let reorderControl = self.subviews.first { view -> Bool in
-//            view.classForCoder.description() == "UITableViewCellReorderControl"
-//        }
-//        return reorderControl?.subviews.first { view -> Bool in
-//            view is UIImageView
-//        } as? UIImageView
-//    }
-//}
-//
-//extension UIImageView {
-//
-//    func tint(color: UIColor) {
-//        self.image = self.image?.withRenderingMode(.alwaysTemplate)
-//        self.tintColor = color
-//    }
-//}
 
 
 
