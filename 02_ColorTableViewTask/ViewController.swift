@@ -7,22 +7,19 @@
 
 import UIKit
 
-enum AppConfig {
+struct AppConfig {
     static let colorsIdKey = "colorsId"
     static let customTableViewCellNibName = "CustomTableViewCell"
     static let cellId = "myCell"
 }
 
-class ColorDataSource {
-    let color: UIColor?
-    let name: String
-    let id: Int
-    private static var lastAssignedId: Int = -1
+struct ColorDataSource {
+    let colorName: String
+    let describtion: String
     
-    init(color: UIColor?, name: String) {
-        self.color = color
-        self.name = name
-        self.id = ColorDataSource.lastAssignedId + 1
+    init(colorName: String, describtion: String) {
+        self.colorName = colorName
+        self.describtion = describtion
     }
 }
 
@@ -34,16 +31,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     
     private var colors: [ColorDataSource] = [
-        ColorDataSource(color: UIColor(named: "Deep Teal"), name: "Deep Teal"),
-        ColorDataSource(color: UIColor(named: "Catalina Blue"), name: "Catalina Blue"),
-        ColorDataSource(color: UIColor(named: "Dark Indigo"), name: "Dark Indigo"),
-        ColorDataSource(color: UIColor(named: "Ripe Plum"), name: "Ripe Plum"),
-        ColorDataSource(color: UIColor(named: "Mulberry Wood"), name: "Mulberry Wood"),
-        ColorDataSource(color: UIColor(named: "Kenyan Copper"), name: "Kenyan Copper"),
-        ColorDataSource(color: UIColor(named: "Chestnut"), name: "Chestnut"),
-        ColorDataSource(color: UIColor(named: "Antique Bronze"), name: "Antique Bronze")
+        ColorDataSource(colorName: "Deep Teal", describtion: "Deep Teal describtion"),
+        ColorDataSource(colorName: "Catalina Blue", describtion: "Catalina Blue describtion"),
+        ColorDataSource(colorName: "Dark Indigo", describtion: "Dark Indigo describtion"),
+        ColorDataSource(colorName: "Ripe Plum", describtion: "Ripe Plum describtion"),
+        ColorDataSource(colorName: "Mulberry Wood", describtion: "Mulberry Wood describtion"),
+        ColorDataSource(colorName: "Kenyan Copper", describtion: "Kenyan Copper describtion"),
+        ColorDataSource(colorName: "Chestnut", describtion: "Chestnut describtion"),
+        ColorDataSource(colorName: "Antique Bronze", describtion: "Antique Bronze describtion")
     ]
-    var colorsId: [Int] = [0, 1, 2, 3, 4, 5, 6, 7]
+    var colorsId: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +60,15 @@ class ViewController: UIViewController {
     func configureTableView() {
         let cellNib = UINib(nibName: AppConfig.customTableViewCellNibName, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: AppConfig.cellId)
-        colorsId = UserDefaults.standard.array(forKey: AppConfig.colorsIdKey) as? [Int] ?? colorsId
+        colorsId = UserDefaults.standard.array(forKey: AppConfig.colorsIdKey) as? [Int] ?? getColorId()
+    }
+    
+    func getColorId ()->[Int] {
+        var colorsId: [Int] = []
+        for index in 0..<colors.count{
+            colorsId.append(index)
+        }
+        return colorsId
     }
     
     @IBAction func toggleEditingMode(_ sender: Any) {
@@ -80,9 +85,8 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AppConfig.cellId, for: indexPath) as? CustomTableViewCell
         let isLast = indexPath.row == colors.count-1 ? true : false;
-        let indexArray = UserDefaults.standard.array(forKey: AppConfig.colorsIdKey) as? [Int] ?? colorsId
-        let index = indexArray[indexPath.row]
-        cell?.configure(colorName: colors[index].name, BGColor: colors[index].color ?? .purple, isLast: isLast)
+        let index = colorsId[indexPath.row]
+        cell?.configure(colorName: colors[index].describtion, BGColorName: colors[index].colorName, isLast: isLast)
         // to set the white color for the reorder icon
         cell?.overrideUserInterfaceStyle = .dark
         return cell ?? UITableViewCell()
@@ -95,8 +99,8 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        textView.backgroundColor = colors[indexPath.row].color
-        textView.text = "Description\n\n" + colors[indexPath.row].name
+        textView.backgroundColor = UIColor(named: colors[colorsId[indexPath.row]].colorName)
+        textView.text = "Description\n\n" + colors[colorsId[indexPath.row]].describtion
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

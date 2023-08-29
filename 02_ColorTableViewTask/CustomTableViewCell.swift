@@ -20,10 +20,10 @@ class CustomTableViewCell: UITableViewCell {
         separatorHeight.constant = 1/UIScreen.main.scale
     }
     
-    func configure(colorName: String, BGColor: UIColor, isLast: Bool) {
+    func configure(colorName: String, BGColorName: String, isLast: Bool) {
         colorLabel.text = colorName
-        myView.backgroundColor = BGColor
-        self.backgroundColor = BGColor
+        myView.backgroundColor = UIColor(named: BGColorName)
+        self.backgroundColor = UIColor(named: BGColorName)
         separator.isHidden = isLast
     }
 }
