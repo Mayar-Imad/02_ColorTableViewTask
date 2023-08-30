@@ -11,19 +11,14 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var myView: UIView!
     @IBOutlet weak var colorLabel: UILabel!
-    @IBOutlet weak var separator: UIView!
-    @IBOutlet weak var separatorHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        separatorHeight.constant = 1/UIScreen.main.scale
     }
     
-    func configure(colorName: String, BGColorName: String, isLast: Bool) {
+    func configure(colorName: String) {
         colorLabel.text = colorName
-        myView.backgroundColor = UIColor(named: BGColorName)
-        self.backgroundColor = UIColor(named: BGColorName)
-        separator.isHidden = isLast
+        myView.backgroundColor = UIColor(named: colorName)
+        self.backgroundColor = UIColor(named: colorName)
     }
 }

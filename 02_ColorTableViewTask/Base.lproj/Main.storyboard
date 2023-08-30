@@ -19,7 +19,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="W1c-6y-ZEg">
                                 <rect key="frame" x="0.0" y="103.00000000000003" width="393" height="322.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="separatorColor" systemColor="secondarySystemBackgroundColor"/>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="RYO-HD-CyO"/>
@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="426.33333333333326" width="393" height="425.66666666666674"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -87,10 +87,6 @@
                                 <exclude reference="MeW-b6-p4w"/>
                                 <exclude reference="ZNK-Vj-bx2"/>
                                 <exclude reference="rwU-bI-7Hv"/>
-                                <exclude reference="Efp-r9-YYf"/>
-                                <exclude reference="ZTc-Rd-HX5"/>
-                                <exclude reference="hWC-k1-ba0"/>
-                                <exclude reference="ikn-Ii-ivX"/>
                                 <exclude reference="Hvp-aa-NyD"/>
                                 <exclude reference="OGB-wS-DbQ"/>
                                 <exclude reference="UiD-EV-c1j"/>
@@ -99,59 +95,40 @@
                                 <exclude reference="kVo-c6-b1m"/>
                                 <exclude reference="ko0-P7-QA3"/>
                                 <exclude reference="pJr-Hf-giY"/>
+                                <exclude reference="Efp-r9-YYf"/>
+                                <exclude reference="ZTc-Rd-HX5"/>
+                                <exclude reference="hWC-k1-ba0"/>
+                                <exclude reference="ikn-Ii-ivX"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
                                 <include reference="ZNK-Vj-bx2"/>
                                 <include reference="rwU-bI-7Hv"/>
-                                <include reference="Efp-r9-YYf"/>
-                                <include reference="hWC-k1-ba0"/>
                                 <include reference="Hvp-aa-NyD"/>
                                 <include reference="XF6-3z-D5h"/>
                                 <include reference="ko0-P7-QA3"/>
+                                <include reference="Efp-r9-YYf"/>
+                                <include reference="hWC-k1-ba0"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="constraints">
                                 <include reference="MeW-b6-p4w"/>
-                                <include reference="ZTc-Rd-HX5"/>
-                                <include reference="ikn-Ii-ivX"/>
                                 <include reference="OGB-wS-DbQ"/>
                                 <include reference="UiD-EV-c1j"/>
                                 <include reference="VJy-gO-UOG"/>
                                 <include reference="kVo-c6-b1m"/>
                                 <include reference="pJr-Hf-giY"/>
+                                <include reference="ZTc-Rd-HX5"/>
+                                <include reference="ikn-Ii-ivX"/>
                             </mask>
                         </variation>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Colors" id="T1X-qC-6rU">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="4EK-6h-JtA">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="vTk-Vx-QTj">
-                                <rect key="frame" x="290" y="5.6666666666666679" width="87" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Edit">
-                                            <attributes>
-                                                <font key="NSFont" size="12" name="Helvetica-Bold"/>
-                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="toggleEditingMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qPI-AU-m9e"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Colors" id="T1X-qC-6rU"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="editButton" destination="vTk-Vx-QTj" id="MIJ-Rx-Wfs"/>
                         <outlet property="separatorHight" destination="1XA-Og-Ifk" id="pVx-6A-PcC"/>
                         <outlet property="tableView" destination="W1c-6y-ZEg" id="ghm-5h-ygT"/>
                         <outlet property="textView" destination="WzK-jB-u2y" id="7yc-En-e8c"/>
@@ -185,14 +162,8 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

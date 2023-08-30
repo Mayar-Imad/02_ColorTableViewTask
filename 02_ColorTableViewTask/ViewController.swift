@@ -28,7 +28,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var separatorHight: NSLayoutConstraint!
-    @IBOutlet weak var editButton: UIButton!
     
     private var colors: [ColorDataSource] = [
         ColorDataSource(colorName: "Deep Teal", describtion: "Deep Teal describtion"),
@@ -40,7 +39,7 @@ class ViewController: UIViewController {
         ColorDataSource(colorName: "Chestnut", describtion: "Chestnut describtion"),
         ColorDataSource(colorName: "Antique Bronze", describtion: "Antique Bronze describtion")
     ]
-    var colorsId: [Int] = []
+    var colorsId: [Int]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,29 +50,32 @@ class ViewController: UIViewController {
     func configureUI() {
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         textView.text = "Description\n\nColors are visual sensations produced by different wavelengths of light. They evoke emotions, convey meaning, and play a vital role in design and communication."
-        textView.backgroundColor = UIColor(named: "Deep Teal")
+        colorsId = UserDefaults.standard.array(forKey: AppConfig.colorsIdKey) as? [Int] ?? getColorId()
+        textView.backgroundColor = UIColor(named: colors[colorsId?[0] ?? 0].colorName)
         textView.isEditable = false
         
         separatorHight.constant = 1/UIScreen.main.scale
+        
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }
     
     func configureTableView() {
         let cellNib = UINib(nibName: AppConfig.customTableViewCellNibName, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: AppConfig.cellId)
-        colorsId = UserDefaults.standard.array(forKey: AppConfig.colorsIdKey) as? [Int] ?? getColorId()
     }
     
-    func getColorId ()->[Int] {
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }
+    
+    func getColorId() -> [Int] {
         var colorsId: [Int] = []
         for index in 0..<colors.count{
             colorsId.append(index)
         }
         return colorsId
-    }
-    
-    @IBAction func toggleEditingMode(_ sender: Any) {
-        tableView.setEditing(!tableView.isEditing, animated: true)
-        editButton.setTitle(tableView.isEditing ?  "Done" : "Edit", for: .normal)
     }
 }
 
@@ -84,9 +86,8 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AppConfig.cellId, for: indexPath) as? CustomTableViewCell
-        let isLast = indexPath.row == colors.count-1 ? true : false;
-        let index = colorsId[indexPath.row]
-        cell?.configure(colorName: colors[index].describtion, BGColorName: colors[index].colorName, isLast: isLast)
+        let index = colorsId?[indexPath.row] ?? 0
+        cell?.configure(colorName: colors[index].colorName)
         // to set the white color for the reorder icon
         cell?.overrideUserInterfaceStyle = .dark
         return cell ?? UITableViewCell()
@@ -99,14 +100,18 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        textView.backgroundColor = UIColor(named: colors[colorsId[indexPath.row]].colorName)
-        textView.text = "Description\n\n" + colors[colorsId[indexPath.row]].describtion
+        let index = colorsId?[indexPath.row] ?? 0
+        textView.backgroundColor = UIColor(named: colors[index].colorName)
+        textView.text = "Description\n\n" + colors[index].describtion
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard var colorsId = colorsId else { return }
         let movedObject = colorsId.remove(at: sourceIndexPath.row)
         colorsId.insert(movedObject, at: destinationIndexPath.row)
         UserDefaults.standard.set(colorsId, forKey: AppConfig.colorsIdKey)
+        self.colorsId = colorsId
+        tableView.reloadData()
     }
     
     // remove the (-) icon
