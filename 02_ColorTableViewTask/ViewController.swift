@@ -7,20 +7,10 @@
 
 import UIKit
 
-struct AppConfig {
-    static let colorsIdKey = "colorsId"
-    static let customTableViewCellNibName = "CustomTableViewCell"
-    static let cellId = "myCell"
-}
-
 struct ColorDataSource {
+    let title: String
     let colorName: String
     let describtion: String
-    
-    init(colorName: String, describtion: String) {
-        self.colorName = colorName
-        self.describtion = describtion
-    }
 }
 
 class ViewController: UIViewController {
@@ -30,27 +20,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var separatorHight: NSLayoutConstraint!
     
     private var colors: [ColorDataSource] = [
-        ColorDataSource(colorName: "Deep Teal", describtion: "Deep Teal describtion"),
-        ColorDataSource(colorName: "Catalina Blue", describtion: "Catalina Blue describtion"),
-        ColorDataSource(colorName: "Dark Indigo", describtion: "Dark Indigo describtion"),
-        ColorDataSource(colorName: "Ripe Plum", describtion: "Ripe Plum describtion"),
-        ColorDataSource(colorName: "Mulberry Wood", describtion: "Mulberry Wood describtion"),
-        ColorDataSource(colorName: "Kenyan Copper", describtion: "Kenyan Copper describtion"),
-        ColorDataSource(colorName: "Chestnut", describtion: "Chestnut describtion"),
-        ColorDataSource(colorName: "Antique Bronze", describtion: "Antique Bronze describtion")
+        ColorDataSource(title: "Deep Teal", colorName: "Deep Teal", describtion: "Deep Teal describtion"),
+        ColorDataSource(title: "Catalina Blue", colorName: "Catalina Blue", describtion: "Catalina Blue describtion"),
+        ColorDataSource(title: "Dark Indigo", colorName: "Dark Indigo", describtion: "Dark Indigo describtion"),
+        ColorDataSource(title: "Ripe Plum", colorName: "Ripe Plum", describtion: "Ripe Plum describtion"),
+        ColorDataSource(title: "Mulberry Wood", colorName: "Mulberry Wood", describtion: "Mulberry Wood describtion"),
+        ColorDataSource(title: "Kenyan Copper", colorName: "Kenyan Copper", describtion: "Kenyan Copper describtion"),
+        ColorDataSource(title: "Chestnut", colorName: "Chestnut", describtion: "Chestnut describtion"),
+        ColorDataSource(title: "Antique Bronze", colorName: "Antique Bronze", describtion: "Antique Bronze describtion")
     ]
-    var colorsId: [Int]?
+    private var colorsId: [Int]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        colorsId = UserDefaults.standard.array(forKey: Constants.colorsIdKey) as? [Int] ?? getColorId()
         configureUI()
         configureTableView()
     }
     
-    func configureUI() {
+    private func configureUI() {
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         textView.text = "Description\n\nColors are visual sensations produced by different wavelengths of light. They evoke emotions, convey meaning, and play a vital role in design and communication."
-        colorsId = UserDefaults.standard.array(forKey: AppConfig.colorsIdKey) as? [Int] ?? getColorId()
         textView.backgroundColor = UIColor(named: colors[colorsId?[0] ?? 0].colorName)
         textView.isEditable = false
         
@@ -60,9 +50,9 @@ class ViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }
     
-    func configureTableView() {
-        let cellNib = UINib(nibName: AppConfig.customTableViewCellNibName, bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: AppConfig.cellId)
+    private func configureTableView() {
+        let cellNib = UINib(nibName: Constants.customTableViewCellNibName, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: CustomTableViewCell.cellId)
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -70,12 +60,17 @@ class ViewController: UIViewController {
         tableView.setEditing(editing, animated: animated)
     }
     
-    func getColorId() -> [Int] {
+    private func getColorId() -> [Int] {
         var colorsId: [Int] = []
         for index in 0..<colors.count{
             colorsId.append(index)
         }
         return colorsId
+    }
+    
+    private func getCustomTableViewCellModel(colorArrayIndex index: Int) -> CustomTableViewCellModel {
+        let color = colors[index]
+        return CustomTableViewCellModel(title: color.title, color: UIColor(named: color.colorName) ?? .black)
     }
 }
 
@@ -85,11 +80,9 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AppConfig.cellId, for: indexPath) as? CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.cellId, for: indexPath) as? CustomTableViewCell
         let index = colorsId?[indexPath.row] ?? 0
-        cell?.configure(colorName: colors[index].colorName)
-        // to set the white color for the reorder icon
-        cell?.overrideUserInterfaceStyle = .dark
+        cell?.configure(getCustomTableViewCellModel(colorArrayIndex: index))
         return cell ?? UITableViewCell()
     }
     
@@ -109,7 +102,7 @@ extension ViewController: UITableViewDelegate {
         guard var colorsId = colorsId else { return }
         let movedObject = colorsId.remove(at: sourceIndexPath.row)
         colorsId.insert(movedObject, at: destinationIndexPath.row)
-        UserDefaults.standard.set(colorsId, forKey: AppConfig.colorsIdKey)
+        UserDefaults.standard.set(colorsId, forKey: Constants.colorsIdKey)
         self.colorsId = colorsId
         tableView.reloadData()
     }

@@ -58,6 +58,34 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnm-Rn-RYF">
+                                <rect key="frame" x="0.0" y="767" width="393" height="85"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="g27-il-xd2">
+                                        <rect key="frame" x="16" y="15.333333333333332" width="50" height="30.333333333333339"/>
+                                        <color key="tintColor" red="1" green="0.1661335655" blue="0.1681824844" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="fzj-PH-v4i"/>
+                                            <constraint firstAttribute="width" constant="50" id="iTD-dc-KqM"/>
+                                            <constraint firstAttribute="height" constant="30" id="rp4-pu-iH3"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ylG-xk-N3G">
+                                        <rect key="frame" x="327" y="18.333333333333329" width="50" height="25.666666666666671"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="NWe-yT-gYe"/>
+                                            <constraint firstAttribute="height" constant="30" id="pKM-kj-XaL"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="ylG-xk-N3G" firstAttribute="top" secondItem="gnm-Rn-RYF" secondAttribute="top" constant="16" id="1vG-Bp-VSZ"/>
+                                    <constraint firstItem="g27-il-xd2" firstAttribute="leading" secondItem="gnm-Rn-RYF" secondAttribute="leading" constant="16" id="Dwi-aW-2it"/>
+                                    <constraint firstAttribute="trailing" secondItem="ylG-xk-N3G" secondAttribute="trailing" constant="16" id="WTo-Ck-yEf"/>
+                                    <constraint firstItem="g27-il-xd2" firstAttribute="top" secondItem="gnm-Rn-RYF" secondAttribute="top" constant="16" id="zK1-Aj-eBF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -70,8 +98,10 @@
                             <constraint firstAttribute="bottom" secondItem="WzK-jB-u2y" secondAttribute="bottom" id="Jv8-qx-Bax"/>
                             <constraint firstAttribute="trailing" secondItem="W1c-6y-ZEg" secondAttribute="trailing" id="MeW-b6-p4w"/>
                             <constraint firstAttribute="trailing" secondItem="3LA-Lo-YkU" secondAttribute="trailing" id="OGB-wS-DbQ"/>
+                            <constraint firstItem="gnm-Rn-RYF" firstAttribute="height" secondItem="WzK-jB-u2y" secondAttribute="height" multiplier="0.2" id="Trx-6h-lky"/>
                             <constraint firstItem="3LA-Lo-YkU" firstAttribute="top" secondItem="W1c-6y-ZEg" secondAttribute="bottom" id="UiD-EV-c1j"/>
                             <constraint firstItem="3LA-Lo-YkU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VJy-gO-UOG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gnm-Rn-RYF" secondAttribute="trailing" id="WMk-OA-JU4"/>
                             <constraint firstItem="3LA-Lo-YkU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="127" id="XF6-3z-D5h"/>
                             <constraint firstItem="W1c-6y-ZEg" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="ZNK-Vj-bx2"/>
                             <constraint firstItem="WzK-jB-u2y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZTc-Rd-HX5"/>
@@ -81,6 +111,8 @@
                             <constraint firstItem="3LA-Lo-YkU" firstAttribute="leading" secondItem="W1c-6y-ZEg" secondAttribute="trailing" id="ko0-P7-QA3"/>
                             <constraint firstItem="3LA-Lo-YkU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pJr-Hf-giY"/>
                             <constraint firstAttribute="bottom" secondItem="W1c-6y-ZEg" secondAttribute="bottom" id="rwU-bI-7Hv"/>
+                            <constraint firstAttribute="bottom" secondItem="gnm-Rn-RYF" secondAttribute="bottom" id="tYT-5e-5eg"/>
+                            <constraint firstItem="gnm-Rn-RYF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xXt-eD-J0t"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -136,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028.1690140845071" y="2.2900763358778624"/>
+            <point key="canvasLocation" x="1026.7175572519084" y="2.1126760563380285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hpx-Nk-G8P">
@@ -162,6 +194,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
