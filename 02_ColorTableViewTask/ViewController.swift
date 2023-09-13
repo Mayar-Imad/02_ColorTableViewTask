@@ -11,6 +11,24 @@ struct ColorDataSource {
     let title: String
     let colorName: String
     let description: String
+    
+    static func initializeColors() -> [ColorDataSource] {
+        let titles = Constants.Text.titles
+        let colorNames = Constants.ColorName.colorsName
+        let descriptions = Constants.Text.desriptions
+        
+        var colors: [ColorDataSource] = []
+        
+        for (index, title) in titles.enumerated() {
+            let color = ColorDataSource(
+                title: title,
+                colorName: colorNames[index],
+                description: descriptions[index]
+            )
+            colors.append(color)
+        }
+        return colors
+    }
 }
 
 class ViewController: UIViewController {
@@ -22,30 +40,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var textViewToSuperViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var textViewToEditViewConstraint: NSLayoutConstraint!
     
-    private var colors: [ColorDataSource] = [
-        ColorDataSource(title: "Deep Teal", colorName: "Deep Teal", description: "Deep Teal description"),
-        ColorDataSource(title: "Catalina Blue", colorName: "Catalina Blue", description: "Catalina Blue description"),
-        ColorDataSource(title: "Dark Indigo", colorName: "Dark Indigo", description: "Dark Indigo description"),
-        ColorDataSource(title: "Ripe Plum", colorName: "Ripe Plum", description: "Ripe Plum description"),
-        ColorDataSource(title: "Mulberry Wood", colorName: "Mulberry Wood", description: "Mulberry Wood description"),
-        ColorDataSource(title: "Kenyan Copper", colorName: "Kenyan Copper", description: "Kenyan Copper description"),
-        ColorDataSource(title: "Chestnut", colorName: "Chestnut", description: "Chestnut description"),
-        ColorDataSource(title: "Antique Bronze", colorName: "Antique Bronze", description: "Antique Bronze description")
-    ]
+    private var colors: [ColorDataSource] = ColorDataSource.initializeColors()
     
     private var colorsId: [Int]?
     private var selectedCellsIndex: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        configureTableView()
-        //print(colorsId)
+        colorsId = UserDefaults.standard.array(forKey: Constants.colorsIdKey) as? [Int] ?? getColorsIdArray()
+        configureViews()
+    }
+    
+    private func configureTableView() {
+        let cellNib = UINib(nibName: Constants.customTableViewCellNibName, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: CustomTableViewCell.cellId)
+        tableView.allowsSelectionDuringEditing = true
     }
     
     private func configureTextView() {
         textView.textContainerInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        textView.text = "Description\n\nColors are visual sensations produced by different wavelengths of light. They evoke emotions, convey meaning, and play a vital role in design and communication."
+        textView.text = Constants.Text.initialDescription
         textView.backgroundColor = UIColor(named: colors[colorsId?[0] ?? 0].colorName)
     }
     
@@ -65,18 +79,12 @@ class ViewController: UIViewController {
         editView.isHidden = !isEditing
     }
     
-    private func configureUI() {
-        colorsId = UserDefaults.standard.array(forKey: Constants.colorsIdKey) as? [Int] ?? getColorId()
+    private func configureViews() {
+        configureTableView()
         configureTextView()
         separatorHight.constant = 1/UIScreen.main.scale
         configureRightButtonItem()
         configureEditView()
-    }
-    
-    private func configureTableView() {
-        let cellNib = UINib(nibName: Constants.customTableViewCellNibName, bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: CustomTableViewCell.cellId)
-        tableView.allowsSelectionDuringEditing = true
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -87,7 +95,7 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     
-    private func getColorId() -> [Int] {
+    private func getColorsIdArray() -> [Int] {
         var colorsId: [Int] = []
         for index in 0..<colors.count{
             colorsId.append(index)
@@ -99,7 +107,6 @@ class ViewController: UIViewController {
         let colorIndex = colorsId?[index] ?? 0
         let color = colors[colorIndex]
         let cellImageName = isEditing ? selectedCellsIndex.contains(index) ? "checkmark.circle.fill" : "circle"  : "none"
-        //print(cellImageName)
         return CustomTableViewCellModel(title: color.title, color: UIColor(named: color.colorName) ?? .black, imageName: cellImageName)
     }
     
@@ -116,7 +123,6 @@ class ViewController: UIViewController {
         UserDefaults.standard.set(colorsId, forKey: Constants.colorsIdKey)
         tableView.reloadData()
     }
-    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -140,11 +146,10 @@ extension ViewController: UITableViewDelegate {
         if (isEditing) {
             if (!selectedCellsIndex.contains(indexPath.row)) {
                 selectedCellsIndex.append(indexPath.row)
-            } else {
-                if let indexToRemove = selectedCellsIndex.firstIndex(of: indexPath.row) {
-                    selectedCellsIndex.remove(at: indexToRemove)
-                }
+            } else if let indexToRemove = selectedCellsIndex.firstIndex(of: indexPath.row) {
+                selectedCellsIndex.remove(at: indexToRemove)
             }
+            
             tableView.reloadData()
         } else {
             let index = colorsId?[indexPath.row] ?? 0
@@ -166,7 +171,6 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
     }
-    
     
     // remove the space before the icon
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
