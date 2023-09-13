@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "616675CC-CF8D-46D7-880E-98519C2C9BEA"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "02_ColorTableViewTask/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "colors"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747 - abbada66be24fe06"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_2_ColorTableViewTask.ViewController.colors.getter : Swift.Array&lt;_2_ColorTableViewTask.ColorDataSource&gt;"
+                  moduleName = "02_ColorTableViewTask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fts/Desktop/Mayar/02_ColorTableViewTask/02_ColorTableViewTask/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "90">
+               </Location>
+               <Location
+                  uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747 - b39eacb100db0c0a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_2_ColorTableViewTask.ViewController.colors.setter : Swift.Array&lt;_2_ColorTableViewTask.ColorDataSource&gt;"
+                  moduleName = "02_ColorTableViewTask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fts/Desktop/Mayar/02_ColorTableViewTask/02_ColorTableViewTask/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747 - e727813708d96b85"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_2_ColorTableViewTask.ViewController.colors.modify : Swift.Array&lt;_2_ColorTableViewTask.ColorDataSource&gt;"
+                  moduleName = "02_ColorTableViewTask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fts/Desktop/Mayar/02_ColorTableViewTask/02_ColorTableViewTask/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747 - e04f3766e0ab813a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_2_ColorTableViewTask.ViewController.colors.modify : Swift.Array&lt;_2_ColorTableViewTask.ColorDataSource&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "02_ColorTableViewTask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fts/Desktop/Mayar/02_ColorTableViewTask/02_ColorTableViewTask/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747 - 17a82fa7573b7111"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_2_ColorTableViewTask.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; _2_ColorTableViewTask.ViewController"
+                  moduleName = "02_ColorTableViewTask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fts/Desktop/Mayar/02_ColorTableViewTask/02_ColorTableViewTask/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "543">
+               </Location>
+               <Location
+                  uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747 - 723a4f7a4387a549"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_2_ColorTableViewTask.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;_2_ColorTableViewTask.ViewController&gt;"
+                  moduleName = "02_ColorTableViewTask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fts/Desktop/Mayar/02_ColorTableViewTask/02_ColorTableViewTask/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "482">
+               </Location>
+               <Location
+                  uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747 - 17a82fa7573b7028"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_2_ColorTableViewTask.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; _2_ColorTableViewTask.ViewController"
+                  moduleName = "02_ColorTableViewTask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fts/Desktop/Mayar/02_ColorTableViewTask/02_ColorTableViewTask/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "2090">
+               </Location>
+               <Location
+                  uuid = "4420E655-B1AE-4BE3-8236-EC7595CA7747 - 723a4f7a4387a470"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "_2_ColorTableViewTask.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;_2_ColorTableViewTask.ViewController&gt;"
+                  moduleName = "02_ColorTableViewTask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fts/Desktop/Mayar/02_ColorTableViewTask/02_ColorTableViewTask/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "2029">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

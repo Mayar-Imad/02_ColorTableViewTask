@@ -10,4 +10,5 @@ import Foundation
 struct Constants {
     static let colorsIdKey = "colorsId"
     static let customTableViewCellNibName = "CustomTableViewCell"
+    static let NewColorVCIdentifier = "NewColor"
 }
