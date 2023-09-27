@@ -9,9 +9,8 @@ import UIKit
 import CoreData
 
 protocol NewColorDelegate: AnyObject {
-    func fetchColorsArray()
     func getColorCount() -> Int
-    func showAlert()
+    func update()
 }
 
 class NewColorVC: UIViewController {
@@ -72,8 +71,7 @@ class NewColorVC: UIViewController {
             print("Error saving the new color")
         }
         navigationController?.popViewController(animated: true)
-        delegate?.showAlert()
-        delegate?.fetchColorsArray()
+        delegate?.update()
     }
     
     private func getColorRGB() -> String {
@@ -93,6 +91,8 @@ extension NewColorVC: UIColorPickerViewControllerDelegate {
         selectedColor = viewController.selectedColor
         backgroundConfig.backgroundColor = selectedColor
         selectColorBtn.configuration?.background = backgroundConfig
+        descriptionTextView.tintColor = selectedColor
+        colorTitleTextField.tintColor = selectedColor
     }
 }
 

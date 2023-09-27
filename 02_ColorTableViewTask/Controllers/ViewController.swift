@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, NewColorDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: UITextView!
@@ -16,6 +16,11 @@ class ViewController: UIViewController, NewColorDelegate {
     @IBOutlet weak var editView: UIView!
     @IBOutlet weak var textViewToSuperViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var textViewToEditViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noColorsLabel: UILabel!
+    @IBOutlet weak var deleteBtn: UIButton!
+    @IBOutlet weak var activityIndicatorView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     private var colors = [ColorDataSource]()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -39,25 +44,6 @@ class ViewController: UIViewController, NewColorDelegate {
         } catch {
             print("Error deleting objects: \(error)")
         }
-    }
-    
-    func fetchColorsArray() {
-        do {
-            let fetchRequest: NSFetchRequest<ColorDataSource> = ColorDataSource.fetchRequest()
-            let sortDescriptor = NSSortDescriptor(key: "position", ascending: true)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            self.colors = try context.fetch(fetchRequest)
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        } catch {
-            print("Error fetching the colors array")
-        }
-    }
-    
-    func getColorCount() -> Int {
-        return colors.count
     }
     
     private func configureTableView() {
@@ -86,6 +72,12 @@ class ViewController: UIViewController, NewColorDelegate {
             textViewToSuperViewConstraint.isActive = true
         }
         editView.isHidden = !isEditing
+        checkAndDisplayDeleteBtn()
+    }
+    
+    private func configureActivityIndicatorView() {
+        activityIndicatorView.layer.cornerRadius = 20
+        activityIndicatorView.isHidden = true
     }
     
     private func configureViews() {
@@ -94,6 +86,8 @@ class ViewController: UIViewController, NewColorDelegate {
         separatorHight.constant = 1/UIScreen.main.scale
         configureRightButtonItem()
         configureEditView()
+        configureActivityIndicatorView()
+        checkAndDisplayNoColorsLabel()
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -123,12 +117,46 @@ class ViewController: UIViewController, NewColorDelegate {
         return UIColor(red: redFloat, green: greenFloat, blue: blueFloat, alpha: 1.0)
     }
     
-    func showAlert() {
+    private func fetchColorsArray() {
+        do {
+            let fetchRequest: NSFetchRequest<ColorDataSource> = ColorDataSource.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "position", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            self.colors = try context.fetch(fetchRequest)
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } catch {
+            print("Error fetching the colors array")
+        }
+    }
+    
+    private func showAlert() {
         let alertController = UIAlertController(title: "Success", message: "Color added successfully", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
         }
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    // view did load, insert new color, delete cells
+    private func checkAndDisplayNoColorsLabel() {
+        let noColorsFlag = colors.isEmpty
+        tableView.isHidden = colors.isEmpty
+        textView.isHidden = colors.isEmpty
+        noColorsLabel.isHidden = !noColorsFlag
+    }
+    
+    // configure edit view, inserting new color, deleting all colors
+    private func checkAndDisplayDeleteBtn() {
+        deleteBtn.isHidden = colors.isEmpty
+    }
+    
+    private func updateColorIfFirst() {
+        if(colors.count == 1){
+            textView.backgroundColor = getUIColor(rgbString: colors[0].color)
+        }
     }
     
     @IBAction func presentNewColorVC(_ sender: Any) {
@@ -138,7 +166,9 @@ class ViewController: UIViewController, NewColorDelegate {
     }
     
     @IBAction func deleteCells(_ sender: Any) {
+        var textViewColorIsDeleted = false
         for index in selectedCellsIndex {
+            if (getUIColor(rgbString: colors[index].color) == textView.backgroundColor) {textViewColorIsDeleted = true}
             self.context.delete(colors[index])
         }
         
@@ -154,6 +184,33 @@ class ViewController: UIViewController, NewColorDelegate {
         
         fetchColorsArray()
         selectedCellsIndex.removeAll()
+        checkAndDisplayNoColorsLabel()
+        checkAndDisplayDeleteBtn()
+        if (textViewColorIsDeleted && !colors.isEmpty) {
+            textView.backgroundColor = getUIColor(rgbString: colors[0].color)
+        }
+                                                  
+    }
+}
+
+extension ViewController: NewColorDelegate {
+    
+    func getColorCount() -> Int {
+        return colors.count
+    }
+    
+    func update() {
+        activityIndicatorView.isHidden = false
+        activityIndicator.startAnimating()
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 2))
+        activityIndicator.stopAnimating()
+        configureActivityIndicatorView()
+        showAlert()
+        fetchColorsArray()
+        checkAndDisplayNoColorsLabel()
+        // i don't call configureEditView here.
+        checkAndDisplayDeleteBtn()
+        updateColorIfFirst()
     }
 }
 
@@ -199,12 +256,9 @@ extension ViewController: UITableViewDelegate {
         
         do {
             try self.context.save()
-            print("changes are saved")
         } catch {
             print("Error contest.save")
         }
-        
-        //fetchColorsArray()
     }
     
     // remove the (-) icon
