@@ -10,6 +10,9 @@
 		2F63B72F2A9F4A3E003B31A7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63B72E2A9F4A3E003B31A7 /* Constants.swift */; };
 		2F63B7332AA7C7C7003B31A7 /* NewColorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63B7322AA7C7C7003B31A7 /* NewColorVC.swift */; };
 		2F63B7372AA91257003B31A7 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63B7362AA91257003B31A7 /* CustomTextField.swift */; };
+		2F63B77F2AB99542003B31A7 /* ColorsDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F63B77D2AB99542003B31A7 /* ColorsDB.xcdatamodeld */; };
+		2F63B7A42ABB480C003B31A7 /* ColorDataSource+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63B7A22ABB480C003B31A7 /* ColorDataSource+CoreDataClass.swift */; };
+		2F63B7A52ABB480C003B31A7 /* ColorDataSource+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F63B7A32ABB480C003B31A7 /* ColorDataSource+CoreDataProperties.swift */; };
 		2FAB45342A8179A300DC8597 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB45332A8179A300DC8597 /* AppDelegate.swift */; };
 		2FAB45362A8179A300DC8597 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB45352A8179A300DC8597 /* SceneDelegate.swift */; };
 		2FAB45382A8179A300DC8597 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAB45372A8179A300DC8597 /* ViewController.swift */; };
@@ -41,6 +44,9 @@
 		2F63B72E2A9F4A3E003B31A7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2F63B7322AA7C7C7003B31A7 /* NewColorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewColorVC.swift; sourceTree = "<group>"; };
 		2F63B7362AA91257003B31A7 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		2F63B77E2AB99542003B31A7 /* ColorsDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ColorsDB.xcdatamodel; sourceTree = "<group>"; };
+		2F63B7A22ABB480C003B31A7 /* ColorDataSource+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorDataSource+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2F63B7A32ABB480C003B31A7 /* ColorDataSource+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorDataSource+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2FAB45302A8179A300DC8597 /* 02_ColorTableViewTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 02_ColorTableViewTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FAB45332A8179A300DC8597 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FAB45352A8179A300DC8597 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +86,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F5C29172AC334C30027CC94 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2FAB45642A82547E00DC8597 /* CustomTableViewCell.xib */,
+				2F63B7362AA91257003B31A7 /* CustomTextField.swift */,
+				2FAB45392A8179A300DC8597 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2F63B7842AB996E0003B31A7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2F63B7A22ABB480C003B31A7 /* ColorDataSource+CoreDataClass.swift */,
+				2F63B7A32ABB480C003B31A7 /* ColorDataSource+CoreDataProperties.swift */,
+				2F63B77D2AB99542003B31A7 /* ColorsDB.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2F63B7A12ABB156C003B31A7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2FAB45372A8179A300DC8597 /* ViewController.swift */,
+				2F63B7322AA7C7C7003B31A7 /* NewColorVC.swift */,
+				2FAB45632A82547E00DC8597 /* CustomTableViewCell.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		2FAB45272A8179A300DC8597 = {
 			isa = PBXGroup;
 			children = (
@@ -101,14 +137,11 @@
 		2FAB45322A8179A300DC8597 /* 02_ColorTableViewTask */ = {
 			isa = PBXGroup;
 			children = (
+				2F5C29172AC334C30027CC94 /* Views */,
+				2F63B7A12ABB156C003B31A7 /* Controllers */,
+				2F63B7842AB996E0003B31A7 /* Models */,
 				2FAB45332A8179A300DC8597 /* AppDelegate.swift */,
 				2FAB45352A8179A300DC8597 /* SceneDelegate.swift */,
-				2FAB45372A8179A300DC8597 /* ViewController.swift */,
-				2F63B7322AA7C7C7003B31A7 /* NewColorVC.swift */,
-				2F63B7362AA91257003B31A7 /* CustomTextField.swift */,
-				2FAB45632A82547E00DC8597 /* CustomTableViewCell.swift */,
-				2FAB45642A82547E00DC8597 /* CustomTableViewCell.xib */,
-				2FAB45392A8179A300DC8597 /* Main.storyboard */,
 				2F63B72E2A9F4A3E003B31A7 /* Constants.swift */,
 				2FAB453C2A8179A600DC8597 /* Assets.xcassets */,
 				2FAB453E2A8179A600DC8597 /* LaunchScreen.storyboard */,
@@ -251,11 +284,14 @@
 			files = (
 				2F63B7372AA91257003B31A7 /* CustomTextField.swift in Sources */,
 				2F63B72F2A9F4A3E003B31A7 /* Constants.swift in Sources */,
+				2F63B7A42ABB480C003B31A7 /* ColorDataSource+CoreDataClass.swift in Sources */,
 				2FAB45382A8179A300DC8597 /* ViewController.swift in Sources */,
+				2F63B7A52ABB480C003B31A7 /* ColorDataSource+CoreDataProperties.swift in Sources */,
 				2FAB45342A8179A300DC8597 /* AppDelegate.swift in Sources */,
 				2F63B7332AA7C7C7003B31A7 /* NewColorVC.swift in Sources */,
 				2FAB45652A82547E00DC8597 /* CustomTableViewCell.swift in Sources */,
 				2FAB45362A8179A300DC8597 /* SceneDelegate.swift in Sources */,
+				2F63B77F2AB99542003B31A7 /* ColorsDB.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +624,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2F63B77D2AB99542003B31A7 /* ColorsDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2F63B77E2AB99542003B31A7 /* ColorsDB.xcdatamodel */,
+			);
+			currentVersion = 2F63B77E2AB99542003B31A7 /* ColorsDB.xcdatamodel */;
+			path = ColorsDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2FAB45282A8179A300DC8597 /* Project object */;
 }

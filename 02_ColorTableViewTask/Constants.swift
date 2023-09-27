@@ -14,11 +14,12 @@ struct Constants {
         static let desriptions: [String] = ["Deep Teal description", "Catalina Blue description", "Dark Indigo description", "Ripe Plum description", "Mulberry Wood description", "Kenyan Copper description", "Chestnut description", "Antique Bronze description"]
     }
     
-    struct ColorName {
+    struct Name {
         static let colorsName: [String] = ["DeepTeal", "CatalinaBlue", "DarkIndigo", "RipePlum", "MulberryWood", "KenyanCopper", "Chestnut", "AntiqueBronze"]
+        static let customTableViewCellNibName = "CustomTableViewCell"
+        static let entityName = "ColorDataSource"
     }
     
     static let colorsIdKey = "colorsId"
-    static let customTableViewCellNibName = "CustomTableViewCell"
     static let NewColorVCIdentifier = "NewColor"
 }

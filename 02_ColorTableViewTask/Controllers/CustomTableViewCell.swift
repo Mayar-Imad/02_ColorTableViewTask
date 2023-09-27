@@ -19,8 +19,6 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var myView: UIView!
     @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
-    @IBOutlet weak var labelToImageLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var labelToViewLeadingConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,15 +29,12 @@ class CustomTableViewCell: UITableViewCell {
         colorLabel.text = customTableViewCellModel.title
         self.backgroundColor = customTableViewCellModel.color
         if (customTableViewCellModel.imageName == "circle" || customTableViewCellModel.imageName == "checkmark.circle.fill") {
-            labelToViewLeadingConstraint.isActive = false
-            labelToImageLeadingConstraint.isActive = true
             cellImage.image = UIImage(systemName: customTableViewCellModel.imageName)
             cellImage.tintColor = .white
             cellImage.isHidden = false
         } else {
-            labelToImageLeadingConstraint.isActive = false
-            labelToViewLeadingConstraint.isActive = true
             cellImage.isHidden = true
         }
+        self.layoutIfNeeded()
     }
 }
