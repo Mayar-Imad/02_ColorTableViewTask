@@ -23,7 +23,6 @@ class ViewController: UIViewController, NewColorDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //deleteAll()
         fetchColorsArray()
         configureViews()
     }
